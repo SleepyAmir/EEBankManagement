@@ -8,6 +8,11 @@ import javax.smartcardio.Card;
 import java.math.BigDecimal;
 import java.util.List;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 @Entity
 @Table(name = "checking_accounts")
 public class CheckingAccount extends Account {

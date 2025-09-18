@@ -1,10 +1,16 @@
 package com.sleepy.eebankmanagement.Model.entity;
 
 
+import com.sleepy.eebankmanagement.Model.entity.enums.HolderType;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 @Entity
 @Table(name = "account_holders")
 public class AccountHolder extends AuditableEntity {
@@ -33,7 +39,5 @@ public class AccountHolder extends AuditableEntity {
     @Column(name = "transaction_limit", precision = 15, scale = 2)
     private java.math.BigDecimal transactionLimit;
 
-    public enum HolderType {
-        PRIMARY, JOINT, AUTHORIZED_USER, BENEFICIARY
-    }
+
 }

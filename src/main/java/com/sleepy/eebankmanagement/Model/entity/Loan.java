@@ -2,12 +2,19 @@ package com.sleepy.eebankmanagement.Model.entity;
 
 
 
+import com.sleepy.eebankmanagement.Model.entity.enums.LoanStatus;
+import com.sleepy.eebankmanagement.Model.entity.enums.LoanType;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 @Entity
 @Table(name = "loans")
 public class Loan extends AuditableEntity {
@@ -73,11 +80,7 @@ public class Loan extends AuditableEntity {
     @OneToMany(mappedBy = "loan", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<LoanPayment> payments;
 
-    public enum LoanType {
-        PERSONAL, MORTGAGE, AUTO, BUSINESS, EDUCATION, CREDIT_LINE
-    }
 
-    public enum LoanStatus {
-        PENDING, ACTIVE, PAID_OFF, DEFAULTED, CLOSED, RESTRUCTURED
-    }
+
+
 }

@@ -1,11 +1,19 @@
 package com.sleepy.eebankmanagement.Model.entity;
 
 
+import com.sleepy.eebankmanagement.Model.entity.enums.TransactionChannel;
+import com.sleepy.eebankmanagement.Model.entity.enums.TransactionStatus;
+import com.sleepy.eebankmanagement.Model.entity.enums.TransactionType;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 @Entity
 @Table(name = "transactions")
 public class Transaction extends AuditableEntity {
@@ -78,18 +86,8 @@ public class Transaction extends AuditableEntity {
     @Column(name = "is_reversed")
     private Boolean isReversed = false;
 
-    public enum TransactionType {
-        DEPOSIT, WITHDRAWAL, TRANSFER, PAYMENT, FEE, INTEREST_CREDIT,
-        INTEREST_DEBIT, REVERSAL, ADJUSTMENT, CHECK_DEPOSIT,
-        CARD_PAYMENT, ATM_WITHDRAWAL, ONLINE_PAYMENT, WIRE_TRANSFER
-    }
 
-    public enum TransactionStatus {
-        PENDING, COMPLETED, FAILED, CANCELLED, REVERSED
-    }
 
-    public enum TransactionChannel {
-        BRANCH, ATM, ONLINE_BANKING, MOBILE_APP, PHONE_BANKING,
-        CARD_PAYMENT, WIRE_TRANSFER, CHECK, DIRECT_DEPOSIT
-    }
+
+
 }

@@ -1,12 +1,18 @@
 package com.sleepy.eebankmanagement.Model.entity;
 
 
+import com.sleepy.eebankmanagement.Model.entity.enums.CardStatus;
+import com.sleepy.eebankmanagement.Model.entity.enums.CardType;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 
 import java.time.LocalDate;
+import lombok.Getter;
+import lombok.Setter;
 
+@Getter
+@Setter
 @Entity
 @Table(name = "cards")
 public class Card extends AuditableEntity {
@@ -56,11 +62,6 @@ public class Card extends AuditableEntity {
     @Column(name = "international_transactions_enabled")
     private Boolean internationalTransactionsEnabled = false;
 
-    public enum CardType {
-        DEBIT, CREDIT, PREPAID
-    }
 
-    public enum CardStatus {
-        ACTIVE, INACTIVE, BLOCKED, EXPIRED, CANCELLED
-    }
+
 }

@@ -1,11 +1,18 @@
 package com.sleepy.eebankmanagement.Model.entity;
 
 
+import com.sleepy.eebankmanagement.Model.entity.enums.PaymentStatus;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
+
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 @Entity
 @Table(name = "loan_payments")
 public class LoanPayment extends AuditableEntity {
@@ -57,7 +64,5 @@ public class LoanPayment extends AuditableEntity {
     @Column(name = "notes", length = 500)
     private String notes;
 
-    public enum PaymentStatus {
-        PENDING, PAID, LATE, MISSED, PARTIAL
-    }
+
 }

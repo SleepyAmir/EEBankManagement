@@ -2,10 +2,17 @@ package com.sleepy.eebankmanagement.Model.entity;
 
 
 
+import com.sleepy.eebankmanagement.Model.entity.enums.PermissionAction;
+import com.sleepy.eebankmanagement.Model.entity.enums.PermissionType;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import java.util.List;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 @Entity
 @Table(name = "permissions")
 public class Permission extends AuditableEntity {
@@ -44,11 +51,7 @@ public class Permission extends AuditableEntity {
     @OneToMany(mappedBy = "permission", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<RolePermission> rolePermissions;
 
-    public enum PermissionType {
-        FUNCTIONAL, DATA_ACCESS, SYSTEM_ADMIN, AUDIT, REPORTING
-    }
 
-    public enum PermissionAction {
-        CREATE, READ, UPDATE, DELETE, APPROVE, REJECT, EXECUTE, EXPORT
-    }
+
+
 }

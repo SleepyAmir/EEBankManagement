@@ -2,12 +2,19 @@ package com.sleepy.eebankmanagement.Model.entity;
 
 
 
+import com.sleepy.eebankmanagement.Model.entity.enums.KycStatus;
+import com.sleepy.eebankmanagement.Model.entity.enums.RiskLevel;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 @Entity
 @Table(name = "customers")
 public class Customer extends Person {
@@ -52,11 +59,5 @@ public class Customer extends Person {
     @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Loan> loans;
 
-    public enum KycStatus {
-        PENDING, IN_PROGRESS, COMPLETED, REJECTED, EXPIRED
-    }
 
-    public enum RiskLevel {
-        LOW, MEDIUM, HIGH, VERY_HIGH
-    }
 }

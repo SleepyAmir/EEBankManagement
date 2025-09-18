@@ -1,9 +1,16 @@
 package com.sleepy.eebankmanagement.Model.entity;
 
 
+import com.sleepy.eebankmanagement.Model.entity.enums.DocumentType;
+import com.sleepy.eebankmanagement.Model.entity.enums.VerificationStatus;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 @Entity
 @Table(name = "person_documents")
 public class PersonDocument extends AuditableEntity {
@@ -43,12 +50,6 @@ public class PersonDocument extends AuditableEntity {
     @Column(name = "verification_notes", length = 500)
     private String verificationNotes;
 
-    public enum DocumentType {
-        NATIONAL_ID, PASSPORT, DRIVER_LICENSE, BIRTH_CERTIFICATE,
-        UTILITY_BILL, BANK_STATEMENT, SALARY_CERTIFICATE, OTHER
-    }
 
-    public enum VerificationStatus {
-        PENDING, APPROVED, REJECTED, EXPIRED
-    }
+
 }

@@ -1,15 +1,20 @@
 package com.sleepy.eebankmanagement.Model.entity;
 
 
+import com.sleepy.eebankmanagement.Model.entity.enums.AccountStatus;
 import jakarta.persistence.Column;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.MappedSuperclass;
 import jakarta.validation.constraints.NotBlank;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
+@Getter
+@Setter
 @MappedSuperclass
 public abstract class Account extends AuditableEntity {
 
@@ -36,7 +41,5 @@ public abstract class Account extends AuditableEntity {
     @Column(name = "currency", length = 3)
     private String currency = "USD";
 
-    public enum AccountStatus {
-        ACTIVE, INACTIVE, CLOSED, FROZEN, SUSPENDED
-    }
+
 }

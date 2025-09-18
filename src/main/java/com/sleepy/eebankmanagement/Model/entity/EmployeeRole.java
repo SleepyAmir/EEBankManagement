@@ -3,6 +3,11 @@ package com.sleepy.eebankmanagement.Model.entity;
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 @Entity
 @Table(name = "employee_roles",
         uniqueConstraints = @UniqueConstraint(columnNames = {"employee_id", "role_id"}))

@@ -1,6 +1,7 @@
 package com.sleepy.eebankmanagement.Model.entity;
 
 
+import com.sleepy.eebankmanagement.Model.entity.enums.Gender;
 import jakarta.persistence.Column;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -10,6 +11,12 @@ import jakarta.validation.constraints.Size;
 
 import java.time.LocalDate;
 
+
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 @MappedSuperclass
 public abstract class Person extends AuditableEntity {
 
@@ -46,7 +53,5 @@ public abstract class Person extends AuditableEntity {
     @Column(name = "gender", length = 10)
     private Gender gender;
 
-    public enum Gender {
-        MALE, FEMALE, OTHER
-    }
+
 }
