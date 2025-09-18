@@ -2,20 +2,21 @@ package com.sleepy.eebankmanagement.Model.entity;
 
 
 import com.sleepy.eebankmanagement.Model.entity.enums.AccountStatus;
-import jakarta.persistence.Column;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.MappedSuperclass;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Getter
 @Setter
-@MappedSuperclass
+@Entity
+@Table(name = "accounts")
+@Inheritance(strategy = InheritanceType.JOINED)
 public abstract class Account extends AuditableEntity {
 
     @Column(name = "account_number", nullable = false, unique = true, length = 20)

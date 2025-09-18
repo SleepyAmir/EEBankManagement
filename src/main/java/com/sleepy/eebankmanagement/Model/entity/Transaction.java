@@ -15,16 +15,9 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
+
 @Table(name = "transactions")
 public class Transaction extends AuditableEntity {
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "account_id", nullable = false)
-    private Account account;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "destination_account_id")
-    private Account destinationAccount;
 
     @Column(name = "transaction_reference", nullable = false, unique = true, length = 50)
     @NotBlank(message = "Transaction reference is required")
@@ -87,6 +80,13 @@ public class Transaction extends AuditableEntity {
     private Boolean isReversed = false;
 
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "account_id", nullable = false)
+    private Account account;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "destination_account_id")
+    private Account destinationAccount;
 
 
 
