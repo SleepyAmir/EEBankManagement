@@ -2,6 +2,8 @@ package com.sleepy.eebankmanagement.Model.entity;
 
 
 
+import com.sleepy.eebankmanagement.Model.entity.enums.FeeType;
+import com.sleepy.eebankmanagement.Model.entity.enums.FrequencyPeriod;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import java.math.BigDecimal;
@@ -78,11 +80,6 @@ public class FeeStructure extends AuditableEntity {
     @Column(name = "waiver_conditions", length = 500)
     private String waiverConditions;
 
-    public enum FeeType {
-        FIXED, PERCENTAGE, TIERED, COMBINATION
-    }
 
-    public enum FrequencyPeriod {
-        DAILY, WEEKLY, MONTHLY, QUARTERLY, YEARLY
-    }
+
 }
