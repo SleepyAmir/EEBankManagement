@@ -19,10 +19,6 @@ import lombok.Setter;
 @Table(name = "loans")
 public class Loan extends AuditableEntity {
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "customer_id", nullable = false)
-    private Customer customer;
-
     @Column(name = "loan_number", nullable = false, unique = true, length = 20)
     @NotBlank(message = "Loan number is required")
     private String loanNumber;
@@ -81,6 +77,16 @@ public class Loan extends AuditableEntity {
     private List<LoanPayment> payments;
 
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "customer_id", nullable = false, foreignKey = @ForeignKey(name = "fk_loan_customer"))
+    private Customer customer;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "disbursement_account_id", foreignKey = @ForeignKey(name = "fk_loan_disbursement_account"))
+    private Account disbursementAccount;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "repayment_account_id", foreignKey = @ForeignKey(name = "fk_loan_repayment_account"))
+    private Account repaymentAccount;
 
 }

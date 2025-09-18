@@ -17,10 +17,6 @@ import lombok.Setter;
 @Table(name = "cards")
 public class Card extends AuditableEntity {
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "account_id", nullable = false)
-    private Account account;
-
     @Column(name = "card_number", nullable = false, unique = true, length = 20)
     @NotBlank(message = "Card number is required")
     private String cardNumber;
@@ -62,6 +58,12 @@ public class Card extends AuditableEntity {
     @Column(name = "international_transactions_enabled")
     private Boolean internationalTransactionsEnabled = false;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "account_id", nullable = false, foreignKey = @ForeignKey(name = "fk_card_account"))
+    private Account account;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "primary_holder_id", foreignKey = @ForeignKey(name = "fk_card_primary_holder"))
+    private Customer primaryHolder;
 
 }

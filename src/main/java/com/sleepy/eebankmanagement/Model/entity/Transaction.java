@@ -81,13 +81,27 @@ public class Transaction extends AuditableEntity {
 
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "account_id", nullable = false)
+    @JoinColumn(name = "account_id", nullable = false, foreignKey = @ForeignKey(name = "fk_transaction_account"))
     private Account account;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "destination_account_id")
+    @JoinColumn(name = "destination_account_id", foreignKey = @ForeignKey(name = "fk_transaction_destination_account"))
     private Account destinationAccount;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "card_id", foreignKey = @ForeignKey(name = "fk_transaction_card"))
+    private Card card;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "initiated_by_customer_id", foreignKey = @ForeignKey(name = "fk_transaction_customer"))
+    private Customer initiatedBy;
+
+    @OneToOne(mappedBy = "originalTransaction", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Transaction reversalTransaction;
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "original_transaction_id", foreignKey = @ForeignKey(name = "fk_transaction_original"))
+    private Transaction originalTransaction;
 
 
 }
