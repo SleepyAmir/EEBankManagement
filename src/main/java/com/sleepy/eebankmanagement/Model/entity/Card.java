@@ -5,7 +5,7 @@ import com.sleepy.eebankmanagement.Model.entity.enums.CardStatus;
 import com.sleepy.eebankmanagement.Model.entity.enums.CardType;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Pattern;
+
 
 import java.time.LocalDate;
 import lombok.Getter;
@@ -33,7 +33,6 @@ public class Card extends AuditableEntity {
     private LocalDate expiryDate;
 
     @Column(name = "cvv", nullable = false, length = 4)
-    @Pattern(regexp = "^[0-9]{3,4}$", message = "CVV must be 3 or 4 digits")
     private String cvv;
 
     @Enumerated(EnumType.STRING)

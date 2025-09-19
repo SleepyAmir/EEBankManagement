@@ -19,12 +19,10 @@ public class Permission extends AuditableEntity {
 
     @Column(name = "permission_name", nullable = false, unique = true, length = 100)
     @NotBlank(message = "Permission name is required")
-    @Size(min = 2, max = 100, message = "Permission name must be between 2 and 100 characters")
     private String permissionName;
 
     @Column(name = "permission_code", nullable = false, unique = true, length = 50)
     @NotBlank(message = "Permission code is required")
-    @Pattern(regexp = "^[A-Z_]+$", message = "Permission code must contain only uppercase letters and underscores")
     private String permissionCode;
 
     @Column(name = "description", length = 500)

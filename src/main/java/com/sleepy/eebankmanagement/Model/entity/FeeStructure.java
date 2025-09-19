@@ -30,24 +30,20 @@ public class FeeStructure extends AuditableEntity {
     @Column(name = "fee_type", nullable = false)
     private FeeType feeType;
 
-    @Column(name = "amount", precision = 15, scale = 2)
-    @DecimalMin(value = "0.0", message = "Fee amount cannot be negative")
+    @Column(name = "amount")
     private BigDecimal amount;
 
-    @Column(name = "percentage", precision = 5, scale = 4)
-    @DecimalMin(value = "0.0", message = "Fee percentage cannot be negative")
-    @DecimalMax(value = "1.0", message = "Fee percentage cannot exceed 100%")
+    @Column(name = "percentage")
     private BigDecimal percentage;
 
-    @Column(name = "minimum_fee", precision = 15, scale = 2)
-    @DecimalMin(value = "0.0", message = "Minimum fee cannot be negative")
+    @Column(name = "minimum_fee")
     private BigDecimal minimumFee;
 
-    @Column(name = "maximum_fee", precision = 15, scale = 2)
+    @Column(name = "maximum_fee")
     @DecimalMin(value = "0.0", message = "Maximum fee cannot be negative")
     private BigDecimal maximumFee;
 
-    @Column(name = "transaction_threshold", precision = 15, scale = 2)
+    @Column(name = "transaction_threshold")
     @DecimalMin(value = "0.0", message = "Transaction threshold cannot be negative")
     private BigDecimal transactionThreshold;
 
@@ -66,10 +62,10 @@ public class FeeStructure extends AuditableEntity {
     private LocalDate expiryDate;
 
     @Column(name = "customer_type", length = 50)
-    private String customerType; // INDIVIDUAL, BUSINESS, PREMIUM, etc.
+    private String customerType;
 
     @Column(name = "account_type", length = 50)
-    private String accountType; // SAVINGS, CHECKING, etc.
+    private String accountType;
 
     @Column(name = "description", length = 500)
     private String description;

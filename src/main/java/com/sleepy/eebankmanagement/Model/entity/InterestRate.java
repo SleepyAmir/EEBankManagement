@@ -22,7 +22,6 @@ public class InterestRate extends AuditableEntity {
     private String tierName;
 
     @Column(name = "minimum_balance", precision = 15, scale = 2)
-    @DecimalMin(value = "0.0", message = "Minimum balance cannot be negative")
     private BigDecimal minimumBalance = BigDecimal.ZERO;
 
     @Column(name = "maximum_balance", precision = 15, scale = 2)
@@ -30,8 +29,6 @@ public class InterestRate extends AuditableEntity {
     private BigDecimal maximumBalance;
 
     @Column(name = "interest_rate", nullable = false, precision = 7, scale = 6)
-    @DecimalMin(value = "0.0", message = "Interest rate cannot be negative")
-    @DecimalMax(value = "1.0", message = "Interest rate cannot exceed 100%")
     private BigDecimal interestRate;
 
     @Column(name = "annual_percentage_yield", precision = 7, scale = 6)
@@ -40,7 +37,7 @@ public class InterestRate extends AuditableEntity {
 
     @Column(name = "compound_frequency", nullable = false)
     @Min(value = 1, message = "Compound frequency must be at least 1")
-    private Integer compoundFrequency = 12; // Monthly by default
+    private Integer compoundFrequency = 12;
 
     @Column(name = "effective_date", nullable = false)
     private LocalDate effectiveDate;

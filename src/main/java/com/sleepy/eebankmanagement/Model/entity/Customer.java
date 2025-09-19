@@ -33,8 +33,6 @@ public class Customer extends Person {
     private RiskLevel riskLevel = RiskLevel.MEDIUM;
 
     @Column(name = "credit_score")
-    @Min(value = 300, message = "Credit score must be at least 300")
-    @Max(value = 850, message = "Credit score must not exceed 850")
     private Integer creditScore;
 
     @Column(name = "monthly_income", precision = 15, scale = 2)

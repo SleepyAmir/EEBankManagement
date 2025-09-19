@@ -24,7 +24,7 @@ public class SavingsAccount extends Account {
     private BigDecimal interestRate;
 
     @Column(name = "compound_frequency")
-    private Integer compoundFrequency = 12; // Monthly by default
+    private Integer compoundFrequency = 12;
 
     @Column(name = "withdrawal_limit_monthly")
     private Integer withdrawalLimitMonthly = 6;

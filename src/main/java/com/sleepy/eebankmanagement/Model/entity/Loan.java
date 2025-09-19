@@ -27,24 +27,20 @@ public class Loan extends AuditableEntity {
     @Column(name = "loan_type", nullable = false)
     private LoanType loanType;
 
-    @Column(name = "principal_amount", nullable = false, precision = 15, scale = 2)
-    @DecimalMin(value = "0.01", message = "Principal amount must be positive")
+    @Column(name = "principal_amount", nullable = false)
     private BigDecimal principalAmount;
 
-    @Column(name = "outstanding_balance", nullable = false, precision = 15, scale = 2)
-    @DecimalMin(value = "0.0", message = "Outstanding balance cannot be negative")
+    @Column(name = "outstanding_balance", nullable = false)
     private BigDecimal outstandingBalance;
 
-    @Column(name = "interest_rate", nullable = false, precision = 5, scale = 4)
-    @DecimalMin(value = "0.0", message = "Interest rate cannot be negative")
-    @DecimalMax(value = "1.0", message = "Interest rate cannot exceed 100%")
+    @Column(name = "interest_rate", nullable = false)
     private BigDecimal interestRate;
 
     @Column(name = "term_months", nullable = false)
     @Min(value = 1, message = "Term must be at least 1 month")
     private Integer termMonths;
 
-    @Column(name = "monthly_payment", nullable = false, precision = 15, scale = 2)
+    @Column(name = "monthly_payment", nullable = false)
     @DecimalMin(value = "0.01", message = "Monthly payment must be positive")
     private BigDecimal monthlyPayment;
 

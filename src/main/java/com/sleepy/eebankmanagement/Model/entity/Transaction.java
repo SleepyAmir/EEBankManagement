@@ -27,18 +27,16 @@ public class Transaction extends AuditableEntity {
     @Column(name = "transaction_type", nullable = false)
     private TransactionType transactionType;
 
-    @Column(name = "amount", nullable = false, precision = 15, scale = 2)
-    @DecimalMin(value = "0.01", message = "Transaction amount must be positive")
+    @Column(name = "amount", nullable = false)
     private BigDecimal amount;
 
-    @Column(name = "fee", precision = 15, scale = 2)
-    @DecimalMin(value = "0.0", message = "Fee cannot be negative")
+    @Column(name = "fee")
     private BigDecimal fee = BigDecimal.ZERO;
 
-    @Column(name = "balance_before", nullable = false, precision = 15, scale = 2)
+    @Column(name = "balance_before", nullable = false)
     private BigDecimal balanceBefore;
 
-    @Column(name = "balance_after", nullable = false, precision = 15, scale = 2)
+    @Column(name = "balance_after", nullable = false)
     private BigDecimal balanceAfter;
 
     @Column(name = "transaction_date", nullable = false)
