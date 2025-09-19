@@ -21,6 +21,6 @@ public class Role extends AuditableEntity {
     @Column(name = "role_name", nullable = false, unique = true, length = 50)
     private String roleName;
 
-    @OneToMany(mappedBy = "role", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "role", cascade = CascadeType.ALL)
     private List<RolePermission> permissions = new ArrayList<>();
 }
