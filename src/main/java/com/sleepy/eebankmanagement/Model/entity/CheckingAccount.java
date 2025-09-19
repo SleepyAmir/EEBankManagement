@@ -4,7 +4,7 @@ package com.sleepy.eebankmanagement.Model.entity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.DecimalMin;
 
-import javax.smartcardio.Card;
+
 import java.math.BigDecimal;
 import java.util.List;
 

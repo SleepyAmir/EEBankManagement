@@ -19,7 +19,7 @@ import lombok.Setter;
 @Table(name = "customers")
 public class Customer extends Person {
 
-    @Id
+
     @Column(name = "customer_number", nullable = false, unique = true, length = 20)
     @NotBlank(message = "Customer number is required")
     private String customerNumber;
