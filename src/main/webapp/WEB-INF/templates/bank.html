@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="fa" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bank System</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            direction: rtl;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 30px;
+        }
+        .header h1 {
+            font-size: 36px;
+        }
+        .cards {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        .card {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        .card-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+        .card-icon {
+            font-size: 40px;
+            margin-left: 15px;
+        }
+        .card-title {
+            font-size: 22px;
+            color: #333;
+            font-weight: 600;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #555;
+            font-weight: 600;
+            font-size: 14px;
+        }
+        input {
+            width: 100%;
+            padding: 10px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 14px;
+        }
+        input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        button {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            color: white;
+        }
+        .btn-transfer {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        .btn-balance {
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+        }
+        button:hover {
+            transform: translateY(-2px);
+        }
+        .result {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 8px;
+            font-size: 14px;
+        }
+        .success {
+            background-color: #d4edda;
+            border: 2px solid #28a745;
+            color: #155724;
+        }
+        .error {
+            background-color: #f8d7da;
+            border: 2px solid #dc3545;
+            color: #721c24;
+        }
+        .balance-display {
+            text-align: center;
+            padding: 20px;
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+            color: white;
+            border-radius: 10px;
+            margin-top: 15px;
+        }
+        .balance-amount {
+            font-size: 32px;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+        @media (max-width: 768px) {
+            .cards {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <h1>🏦 سیستم بانکی</h1>
+        <p>مدیریت حساب بانکی</p>
+    </div>
+
+    <div class="cards">
+        <!-- Transfer Card -->
+        <div class="card">
+            <div class="card-header">
+                <div class="card-icon">💳</div>
+                <div class="card-title">انتقال پول</div>
+            </div>
+
+            <form method="post" action="/bank">
+                <input type="hidden" name="action" value="transfer">
+
+                <div class="form-group">
+                    <label>از شماره کارت:</label>
+                    <input type="text" name="fromCard" placeholder="1234567890123456" required>
+                </div>
+
+                <div class="form-group">
+                    <label>به شماره کارت:</label>
+                    <input type="text" name="toCard" placeholder="6543210987654321" required>
+                </div>
+
+                <div class="form-group">
+                    <label>مبلغ:</label>
+                    <input type="number" name="amount" placeholder="100" step="1" required>
+                </div>
+
+                <button type="submit" class="btn-transfer">انتقال</button>
+            </form>
+
+            <div th:if="${transferSuccess != null}">
+                <div th:if="${transferSuccess}" class="result success">
+                    <strong>✓</strong>
+                    <span th:text="${transferMessage}"></span>
+                </div>
+                <div th:unless="${transferSuccess}" class="result error">
+                    <strong>✗</strong>
+                    <span th:text="${transferMessage}"></span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Balance Card -->
+        <div class="card">
+            <div class="card-header">
+                <div class="card-icon">💰</div>
+                <div class="card-title">موجودی حساب</div>
+            </div>
+
+            <form method="post" action="/bank">
+                <input type="hidden" name="action" value="balance">
+
+                <div class="form-group">
+                    <label>شماره کارت:</label>
+                    <input type="text"
+                           name="cardNumber"
+                           placeholder="1234567890123456"
+                           th:value="${cardNumber}"
+                           required>
+                </div>
+
+                <button type="submit" class="btn-balance">استعلام موجودی</button>
+            </form>
+
+            <div th:if="${balanceSuccess != null}">
+                <div th:if="${balanceSuccess}" class="balance-display">
+                    <div>موجودی حساب</div>
+                    <div class="balance-amount" th:text="${balance}"></div>
+                    <div style="font-size: 14px; opacity: 0.9;" th:text="'کارت: ' + ${cardNumber}"></div>
+                </div>
+                <div th:unless="${balanceSuccess}" class="result error">
+                    <strong>✗</strong>
+                    <span th:text="${balanceMessage}"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

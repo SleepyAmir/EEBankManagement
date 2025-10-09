@@ -1,63 +1,75 @@
 package com.sleepy.eebankmanagement.api;
 
+import com.sleepy.eebankmanagement.Model.entity.ApiResponse;
 import com.sleepy.eebankmanagement.services.TransferService;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
+import lombok.Getter;
+import lombok.Setter;
+
 import java.math.BigDecimal;
 
-@Path("/api/transfer")
+@Path("/transfer")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 public class TransferApi {
 
     @Inject
-    private TransferService service;
+    private TransferService transferService;
 
     @POST
     public Response transfer(TransferRequest request) {
+        ApiResponse apiResponse = new ApiResponse();
+
         try {
-            String result = service.transfer(
-                    request.fromCard,
-                    request.toCard,
-                    request.amount
+            String result = transferService.transfer(
+                    request.getFromCard(),
+                    request.getToCard(),
+                    request.getAmount()
             );
-            return Response.ok(new ApiResponse(200, result)).build();
+
+            apiResponse.setStatus(200);
+            apiResponse.setMessage("Transfer successful");
+            apiResponse.setData(result);
+
+            return Response.status(Response.Status.OK).entity(apiResponse).build();
+
         } catch (Exception e) {
-            return Response.status(400)
-                    .entity(new ApiResponse(400, e.getMessage()))
-                    .build();
+            apiResponse.setStatus(500);
+            apiResponse.setMessage("Transfer Error: " + e.getMessage());
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(apiResponse).build();
         }
     }
 
     @GET
-    @Path("/balance/{card}")
-    public Response balance(@PathParam("card") String card) {
+    @Path("/balance/{cardNumber}")
+    public Response getBalance(@PathParam("cardNumber") String cardNumber) {
+        ApiResponse apiResponse = new ApiResponse();
+
         try {
-            BigDecimal balance = service.getBalance(card);
-            return Response.ok(new ApiResponse(200, "Balance: " + balance)).build();
+            BigDecimal balance = transferService.getBalance(cardNumber);
+
+            apiResponse.setStatus(200);
+            apiResponse.setMessage("Balance retrieved successfully");
+            apiResponse.setData(balance);
+
+            return Response.status(Response.Status.OK).entity(apiResponse).build();
+
         } catch (Exception e) {
-            return Response.status(404)
-                    .entity(new ApiResponse(404, e.getMessage()))
-                    .build();
+            apiResponse.setStatus(404);
+            apiResponse.setMessage("Card not found: " + e.getMessage());
+            return Response.status(Response.Status.NOT_FOUND).entity(apiResponse).build();
         }
     }
 
-    // Classes
+    // Inner Class
+    @Getter
+    @Setter
     public static class TransferRequest {
-        public String fromCard;
-        public String toCard;
-        public BigDecimal amount;
-    }
-
-    public static class ApiResponse {
-        public int status;
-        public String message;
-
-        public ApiResponse(int status, String message) {
-            this.status = status;
-            this.message = message;
-        }
+        private String fromCard;
+        private String toCard;
+        private BigDecimal amount;
     }
 }

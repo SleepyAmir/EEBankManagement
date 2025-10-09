@@ -15,7 +15,6 @@ public class TransferService {
     private EntityManager em;
 
     public String transfer(String fromCardNumber, String toCardNumber, BigDecimal amount) {
-        // Find cards
         Card fromCard = em.createQuery("SELECT c FROM Card c WHERE c.cardNumber = :num", Card.class)
                 .setParameter("num", fromCardNumber)
                 .getSingleResult();
@@ -24,20 +23,16 @@ public class TransferService {
                 .setParameter("num", toCardNumber)
                 .getSingleResult();
 
-        // Get accounts
         Account fromAccount = fromCard.getAccount();
         Account toAccount = toCard.getAccount();
 
-        // Check balance
         if (fromAccount.getBalance().compareTo(amount) < 0) {
             throw new RuntimeException("Insufficient funds");
         }
 
-        // Transfer money
         fromAccount.setBalance(fromAccount.getBalance().subtract(amount));
         toAccount.setBalance(toAccount.getBalance().add(amount));
 
-        // Save transaction
         Transaction tx = new Transaction();
         tx.setTransactionReference("TXN-" + System.currentTimeMillis());
         tx.setTransactionType(TransactionType.TRANSFER);
