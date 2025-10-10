@@ -1,6 +1,7 @@
 package com.sleepy.eebankmanagement.api;
 
 import com.sleepy.eebankmanagement.Model.entity.ApiResponse;
+import com.sleepy.eebankmanagement.Model.entity.TransferRequest;
 import com.sleepy.eebankmanagement.services.TransferService;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.*;
@@ -64,12 +65,5 @@ public class TransferApi {
         }
     }
 
-    // Inner Class
-    @Getter
-    @Setter
-    public static class TransferRequest {
-        private String fromCard;
-        private String toCard;
-        private BigDecimal amount;
-    }
+
 }
