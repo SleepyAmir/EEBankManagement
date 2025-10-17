@@ -8,6 +8,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import lombok.extern.slf4j.Slf4j;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.WebContext;
 import org.thymeleaf.web.IWebExchange;
@@ -17,6 +18,7 @@ import java.io.IOException;
 import java.math.BigDecimal;
 
 @WebServlet("/bank")
+@Slf4j
 public class BankServlet extends HttpServlet {
 
     @Inject
