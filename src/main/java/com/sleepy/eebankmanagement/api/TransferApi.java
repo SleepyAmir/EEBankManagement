@@ -1,14 +1,12 @@
 package com.sleepy.eebankmanagement.api;
 
-import com.sleepy.eebankmanagement.Model.entity.ApiResponse;
-import com.sleepy.eebankmanagement.Model.entity.TransferRequest;
+import com.sleepy.eebankmanagement.entity.ApiResponse;
+import com.sleepy.eebankmanagement.entity.TransferRequest;
 import com.sleepy.eebankmanagement.services.TransferService;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
-import lombok.Getter;
-import lombok.Setter;
 
 import java.math.BigDecimal;
 
