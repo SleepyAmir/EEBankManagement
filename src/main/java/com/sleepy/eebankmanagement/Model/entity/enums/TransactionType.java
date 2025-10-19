@@ -1,7 +1,0 @@
-package com.sleepy.eebankmanagement.Model.entity.enums;
-
-public enum TransactionType {
-    DEPOSIT, WITHDRAWAL, TRANSFER, PAYMENT, FEE, INTEREST_CREDIT,
-    INTEREST_DEBIT, REVERSAL, ADJUSTMENT, CHECK_DEPOSIT,
-    CARD_PAYMENT, ATM_WITHDRAWAL, ONLINE_PAYMENT, WIRE_TRANSFER
-}
