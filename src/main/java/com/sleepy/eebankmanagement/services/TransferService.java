@@ -1,11 +1,9 @@
 package com.sleepy.eebankmanagement.services;
 
 
-import com.sleepy.eebankmanagement.entity.Account;
-import com.sleepy.eebankmanagement.entity.Card;
-import com.sleepy.eebankmanagement.entity.Transaction;
-import com.sleepy.eebankmanagement.entity.enums.TransactionStatus;
-import com.sleepy.eebankmanagement.entity.enums.TransactionType;
+import com.sleepy.eebankmanagement.model.entity.account.Account;
+import com.sleepy.eebankmanagement.model.entity.card.Card;
+import com.sleepy.eebankmanagement.model.entity.transaction.Transaction;
 import jakarta.ejb.Stateless;
 import jakarta.persistence.*;
 import java.math.BigDecimal;

@@ -1,7 +1,7 @@
 package com.sleepy.eebankmanagement.api;
 
-import com.sleepy.eebankmanagement.entity.ApiResponse;
-import com.sleepy.eebankmanagement.entity.TransferRequest;
+import com.sleepy.eebankmanagement.model.entity.config.ApiResponse;
+import com.sleepy.eebankmanagement.model.entity.transaction.TransferRequest;
 import com.sleepy.eebankmanagement.services.TransferService;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.*;
