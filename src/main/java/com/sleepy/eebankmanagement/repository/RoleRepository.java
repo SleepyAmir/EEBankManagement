@@ -9,7 +9,7 @@ import jakarta.persistence.PersistenceContext;
 @Stateless
 public class RoleRepository extends BaseRepository<Role> {
 
-    @PersistenceContext(unitName = "mainPU")
+    @PersistenceContext(unitName = "sleepy")
     private EntityManager entityManager;
 
     @Override
