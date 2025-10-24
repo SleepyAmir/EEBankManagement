@@ -1,6 +1,7 @@
 package com.sleepy.eebankmanagement.servlet;
 
-
+import com.sleepy.eebankmanagement.model.dto.CardDTO;
+import com.sleepy.eebankmanagement.model.dto.CustomerDTO;
 import com.sleepy.eebankmanagement.model.entity.Card;
 import com.sleepy.eebankmanagement.services.CardInfoService;
 import jakarta.inject.Inject;
@@ -19,6 +20,7 @@ import org.thymeleaf.web.servlet.JakartaServletWebApplication;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @WebServlet("/dashboard")
 @Slf4j
@@ -32,12 +34,16 @@ public class DashboardServlet extends HttpServlet {
             throws ServletException, IOException {
 
         HttpSession session = req.getSession(false);
-        if (session == null || session.getAttribute("customerId") == null) {
+        if (session == null) {
             resp.sendRedirect("/auth");
             return;
         }
 
-        Long customerId = (Long) session.getAttribute("customerId");
+        CustomerDTO customer = (CustomerDTO) session.getAttribute("customer");
+        if (customer == null) {
+            resp.sendRedirect("/auth");
+            return;
+        }
 
         ServletContext servletContext = getServletContext();
         TemplateEngine templateEngine = (TemplateEngine) servletContext.getAttribute("templateEngine");
@@ -47,9 +53,14 @@ public class DashboardServlet extends HttpServlet {
         WebContext ctx = new WebContext(exchange, req.getLocale());
 
         try {
-            List<Card> cards = cardInfoService.getCustomerCards(customerId);
+            // Get cards and convert to DTOs
+            List<Card> cardEntities = cardInfoService.getCustomerCards(customer.getId());
+            List<CardDTO> cards = cardEntities.stream()
+                    .map(CardDTO::new)
+                    .collect(Collectors.toList());
 
-            ctx.setVariable("customerName", session.getAttribute("customerName"));
+            ctx.setVariable("customerName", customer.getFullName());
+            ctx.setVariable("customerEmail", customer.getEmail());
             ctx.setVariable("cards", cards);
             ctx.setVariable("hasCards", !cards.isEmpty());
 

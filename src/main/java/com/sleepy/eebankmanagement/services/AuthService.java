@@ -1,5 +1,7 @@
 package com.sleepy.eebankmanagement.services;
 
+import com.sleepy.eebankmanagement.model.dto.CustomerDTO;
+import com.sleepy.eebankmanagement.model.dto.UserDTO;
 import com.sleepy.eebankmanagement.model.entity.*;
 import com.sleepy.eebankmanagement.model.entity.enums.*;
 import jakarta.ejb.Stateless;
@@ -24,7 +26,7 @@ public class AuthService {
     private EntityManager em;
 
     @Transactional
-    public Customer login(String email, String password) {
+    public CustomerDTO customerLogin(String email, String password) {
         try {
             String hashedPassword = hashPassword(password);
 
@@ -38,35 +40,62 @@ public class AuthService {
             em.merge(customer);
 
             log.info("Customer {} logged in successfully", email);
-            return customer;
+            return new CustomerDTO(customer);
 
         } catch (NoResultException e) {
-            log.warn("Login failed for email: {}", email);
+            log.warn("Customer login failed for email: {}", email);
             throw new RuntimeException("ایمیل یا رمز عبور اشتباه است");
         }
     }
 
     @Transactional
-    public Customer signup(String firstName, String lastName, String nationalId,
-                           String email, String phoneNumber, String password, String address) {
+    public UserDTO userLogin(String username, String password) {
+        try {
+            String hashedPassword = hashPassword(password);
 
+            User user = em.createNamedQuery(User.findByUsername, User.class)
+                    .setParameter("username", username)
+                    .getSingleResult();
+
+            // Verify password
+            if (!user.getPassword().equals(hashedPassword)) {
+                throw new RuntimeException("نام کاربری یا رمز عبور اشتباه است");
+            }
+
+            log.info("User {} logged in successfully", username);
+            return new UserDTO(user);
+
+        } catch (NoResultException e) {
+            log.warn("User login failed for username: {}", username);
+            throw new RuntimeException("نام کاربری یا رمز عبور اشتباه است");
+        }
+    }
+
+    @Transactional
+    public CustomerDTO signup(String firstName, String lastName, String nationalId,
+                              String email, String phoneNumber, String password, String address) {
+
+        // Check if email exists
         try {
             em.createQuery("SELECT c FROM Customer c WHERE c.email = :email", Customer.class)
                     .setParameter("email", email)
                     .getSingleResult();
             throw new RuntimeException("این ایمیل قبلاً ثبت شده است");
         } catch (NoResultException e) {
+            // Email doesn't exist, continue
         }
 
+        // Check if national ID exists
         try {
             em.createQuery("SELECT c FROM Customer c WHERE c.nationalId = :nationalId", Customer.class)
                     .setParameter("nationalId", nationalId)
                     .getSingleResult();
             throw new RuntimeException("این کد ملی قبلاً ثبت شده است");
         } catch (NoResultException e) {
-
+            // National ID doesn't exist, continue
         }
 
+        // Create customer
         Customer customer = new Customer();
         customer.setFirstName(firstName);
         customer.setLastName(lastName);
@@ -84,6 +113,7 @@ public class AuthService {
 
         em.persist(customer);
 
+        // Create checking account
         CheckingAccount account = new CheckingAccount();
         account.setAccountNumber(generateAccountNumber());
         account.setBalance(BigDecimal.ZERO);
@@ -99,6 +129,7 @@ public class AuthService {
 
         em.persist(account);
 
+        // Create account holder
         AccountHolder accountHolder = new AccountHolder();
         accountHolder.setCustomer(customer);
         accountHolder.setAccount(account);
@@ -115,6 +146,7 @@ public class AuthService {
 
         em.persist(accountHolder);
 
+        // Create card
         Card card = new Card();
         card.setCardNumber(generateCardNumber());
         card.setCardType(CardType.DEBIT);
@@ -122,7 +154,7 @@ public class AuthService {
         card.setExpiryDate(LocalDate.now().plusYears(4));
         card.setCvv(generateCVV());
         card.setStatus(CardStatus.ACTIVE);
-        card.setPinHash(hashPassword("1234")); // Default PIN
+        card.setPinHash(hashPassword("1234"));
         card.setDailyLimit(new BigDecimal("5000000"));
         card.setMonthlyLimit(new BigDecimal("50000000"));
         card.setContactlessEnabled(true);
@@ -137,7 +169,7 @@ public class AuthService {
         em.persist(card);
 
         log.info("New customer registered: {} with card: {}", email, card.getCardNumber());
-        return customer;
+        return new CustomerDTO(customer);
     }
 
     private String generateAccountNumber() {
