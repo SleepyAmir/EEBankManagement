@@ -53,7 +53,6 @@ public class DashboardServlet extends HttpServlet {
         WebContext ctx = new WebContext(exchange, req.getLocale());
 
         try {
-            // Get cards and convert to DTOs
             List<Card> cardEntities = cardInfoService.getCustomerCards(customer.getId());
             List<CardDTO> cards = cardEntities.stream()
                     .map(CardDTO::new)

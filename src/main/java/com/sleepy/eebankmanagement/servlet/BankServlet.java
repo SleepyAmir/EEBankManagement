@@ -88,7 +88,6 @@ public class BankServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
 
-        // Check if user is logged in
         HttpSession session = req.getSession(false);
         if (session == null || session.getAttribute("customerId") == null) {
             resp.sendRedirect("/auth");

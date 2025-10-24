@@ -61,7 +61,6 @@ public class AuthService {
                     .setParameter("username", username)
                     .getSingleResult();
 
-            // Verify password
             if (!user.getPassword().equals(hashedPassword)) {
                 throw new RuntimeException("نام کاربری یا رمز عبور اشتباه است");
             }
