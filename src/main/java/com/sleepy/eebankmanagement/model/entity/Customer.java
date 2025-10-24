@@ -1,8 +1,8 @@
 package com.sleepy.eebankmanagement.model.entity;
 
 
-import com.sleepy.eebankmanagement.Model.entity.enums.KycStatus;
-import com.sleepy.eebankmanagement.Model.entity.enums.RiskLevel;
+import com.sleepy.eebankmanagement.model.entity.enums.KycStatus;
+import com.sleepy.eebankmanagement.model.entity.enums.RiskLevel;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.NotBlank;

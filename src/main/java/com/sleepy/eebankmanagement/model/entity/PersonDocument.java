@@ -1,8 +1,8 @@
 package com.sleepy.eebankmanagement.model.entity;
 
 
-import com.sleepy.eebankmanagement.Model.entity.enums.DocumentType;
-import com.sleepy.eebankmanagement.Model.entity.enums.VerificationStatus;
+import com.sleepy.eebankmanagement.model.entity.enums.DocumentType;
+import com.sleepy.eebankmanagement.model.entity.enums.VerificationStatus;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;

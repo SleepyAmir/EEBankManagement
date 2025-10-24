@@ -1,8 +1,8 @@
 package com.sleepy.eebankmanagement.model.entity;
 
 
-import com.sleepy.eebankmanagement.Model.entity.enums.LoanStatus;
-import com.sleepy.eebankmanagement.Model.entity.enums.LoanType;
+import com.sleepy.eebankmanagement.model.entity.enums.LoanStatus;
+import com.sleepy.eebankmanagement.model.entity.enums.LoanType;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.Min;

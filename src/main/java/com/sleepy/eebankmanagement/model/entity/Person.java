@@ -1,7 +1,7 @@
 package com.sleepy.eebankmanagement.model.entity;
 
 
-import com.sleepy.eebankmanagement.Model.entity.enums.Gender;
+import com.sleepy.eebankmanagement.model.entity.enums.Gender;
 import jakarta.persistence.Column;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;

@@ -1,8 +1,8 @@
 package com.sleepy.eebankmanagement.model.entity;
 
 
-import com.sleepy.eebankmanagement.Model.entity.enums.FeeType;
-import com.sleepy.eebankmanagement.Model.entity.enums.FrequencyPeriod;
+import com.sleepy.eebankmanagement.model.entity.enums.FeeType;
+import com.sleepy.eebankmanagement.model.entity.enums.FrequencyPeriod;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.Min;

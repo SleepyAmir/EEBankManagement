@@ -1,6 +1,6 @@
 package com.sleepy.eebankmanagement.model.entity;
 
-import com.sleepy.eebankmanagement.Model.entity.enums.HolderType;
+import com.sleepy.eebankmanagement.model.entity.enums.HolderType;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;

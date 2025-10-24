@@ -1,9 +1,9 @@
 package com.sleepy.eebankmanagement.model.entity;
 
 
-import com.sleepy.eebankmanagement.Model.entity.enums.TransactionChannel;
-import com.sleepy.eebankmanagement.Model.entity.enums.TransactionStatus;
-import com.sleepy.eebankmanagement.Model.entity.enums.TransactionType;
+import com.sleepy.eebankmanagement.model.entity.enums.TransactionChannel;
+import com.sleepy.eebankmanagement.model.entity.enums.TransactionStatus;
+import com.sleepy.eebankmanagement.model.entity.enums.TransactionType;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;

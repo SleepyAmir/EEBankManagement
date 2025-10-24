@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bank System</title>
+    <title>سیستم بانکی</title>
     <style>
         * {
             margin: 0;
@@ -24,10 +24,48 @@
         .header {
             text-align: center;
             color: white;
-            margin-bottom: 30px;
+            margin-bottom: 20px;
         }
         .header h1 {
             font-size: 36px;
+        }
+        .user-info {
+            background: rgba(255,255,255,0.2);
+            padding: 15px 25px;
+            border-radius: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            backdrop-filter: blur(10px);
+        }
+        .user-name {
+            color: white;
+            font-size: 18px;
+            font-weight: 600;
+        }
+        .user-name span {
+            font-size: 16px;
+            opacity: 0.9;
+            margin-left: 10px;
+        }
+        .logout-btn {
+            background: rgba(255,255,255,0.9);
+            color: #667eea;
+            padding: 10px 25px;
+            border: none;
+            border-radius: 10px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+        .logout-btn:hover {
+            background: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
         }
         .cards {
             display: grid;
@@ -95,6 +133,8 @@
         }
         button:hover {
             transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            transition: all 0.3s;
         }
         .result {
             margin-top: 20px;
@@ -125,9 +165,31 @@
             font-weight: bold;
             margin: 10px 0;
         }
+        .info-box {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            border-right: 4px solid #667eea;
+        }
+        .info-box h4 {
+            color: #667eea;
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+        .info-box p {
+            color: #666;
+            font-size: 13px;
+            line-height: 1.6;
+        }
         @media (max-width: 768px) {
             .cards {
                 grid-template-columns: 1fr;
+            }
+            .user-info {
+                flex-direction: column;
+                gap: 15px;
+                text-align: center;
             }
         }
     </style>
@@ -135,14 +197,32 @@
 <body>
 <div class="container">
     <div class="header">
-        <h1>سیستم بانکی</h1>
+        <h1>🏦 سیستم بانکی</h1>
         <p>مدیریت حساب بانکی</p>
+    </div>
+
+    <div class="user-info">
+        <div class="user-name">
+            <span>خوش آمدید</span>
+            <span th:text="${customerName}">کاربر</span>
+        </div>
+        <a href="/auth?action=logout" class="logout-btn">خروج از حساب</a>
+    </div>
+
+    <div class="info-box">
+        <h4>💡 راهنما:</h4>
+        <p>
+            پس از ثبت‌نام، یک حساب بانکی و کارت به شما اختصاص داده شده است.
+            برای انتقال وجه یا مشاهده موجودی، شماره کارت خود را وارد کنید.
+            همچنین می‌توانید به سایر کارت‌ها نیز پول انتقال دهید.
+        </p>
     </div>
 
     <div class="cards">
         <!-- Transfer Card -->
         <div class="card">
             <div class="card-header">
+                <div class="card-icon">💸</div>
                 <div class="card-title">انتقال پول</div>
             </div>
 
@@ -151,36 +231,41 @@
 
                 <div class="form-group">
                     <label>از شماره کارت:</label>
-                    <input type="text" name="fromCard" placeholder="1234567890123456" required>
+                    <input type="text" name="fromCard" placeholder="1234567890123456"
+                           pattern="[0-9]{16}" maxlength="16" required>
                 </div>
 
                 <div class="form-group">
                     <label>به شماره کارت:</label>
-                    <input type="text" name="toCard" placeholder="6543210987654321" required>
+                    <input type="text" name="toCard" placeholder="6543210987654321"
+                           pattern="[0-9]{16}" maxlength="16" required>
                 </div>
 
                 <div class="form-group">
-                    <label>مبلغ:</label>
-                    <input type="number" name="amount" placeholder="100" step="1" required>
+                    <label>مبلغ (ریال):</label>
+                    <input type="number" name="amount" placeholder="100000"
+                           min="1000" step="1000" required>
                 </div>
 
-                <button type="submit" class="btn-transfer">انتقال</button>
+                <button type="submit" class="btn-transfer">انتقال وجه</button>
             </form>
 
             <div th:if="${transferSuccess != null}">
                 <div th:if="${transferSuccess}" class="result success">
                     <strong>✓</strong>
-                    <span th:text="${transferMessage}"></span>
+                    <span th:text="${transferMessage}">انتقال موفق</span>
                 </div>
                 <div th:unless="${transferSuccess}" class="result error">
                     <strong>✗</strong>
-                    <span th:text="${transferMessage}"></span>
+                    <span th:text="${transferMessage}">خطا در انتقال</span>
                 </div>
             </div>
         </div>
 
+        <!-- Balance Card -->
         <div class="card">
             <div class="card-header">
+                <div class="card-icon">💰</div>
                 <div class="card-title">موجودی حساب</div>
             </div>
 
@@ -193,6 +278,8 @@
                            name="cardNumber"
                            placeholder="1234567890123456"
                            th:value="${cardNumber}"
+                           pattern="[0-9]{16}"
+                           maxlength="16"
                            required>
                 </div>
 
@@ -202,12 +289,15 @@
             <div th:if="${balanceSuccess != null}">
                 <div th:if="${balanceSuccess}" class="balance-display">
                     <div>موجودی حساب</div>
-                    <div class="balance-amount" th:text="${balance}"></div>
+                    <div class="balance-amount">
+                        <span th:text="${#numbers.formatDecimal(balance, 0, 'COMMA', 0, 'POINT')}">0</span>
+                        <span style="font-size: 18px; margin-right: 5px;">ریال</span>
+                    </div>
                     <div style="font-size: 14px; opacity: 0.9;" th:text="'کارت: ' + ${cardNumber}"></div>
                 </div>
                 <div th:unless="${balanceSuccess}" class="result error">
                     <strong>✗</strong>
-                    <span th:text="${balanceMessage}"></span>
+                    <span th:text="${balanceMessage}">کارت یافت نشد</span>
                 </div>
             </div>
         </div>

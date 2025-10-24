@@ -1,7 +1,7 @@
 package com.sleepy.eebankmanagement.model.entity;
 
 
-import com.sleepy.eebankmanagement.Model.entity.enums.PaymentStatus;
+import com.sleepy.eebankmanagement.model.entity.enums.PaymentStatus;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Min;
 import lombok.Getter;

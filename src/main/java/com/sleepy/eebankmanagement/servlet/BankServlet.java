@@ -1,5 +1,6 @@
 package com.sleepy.eebankmanagement.servlet;
 
+import com.sleepy.eebankmanagement.model.entity.Customer;
 import com.sleepy.eebankmanagement.services.TransferService;
 import jakarta.inject.Inject;
 import jakarta.servlet.ServletContext;
@@ -8,6 +9,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.WebContext;
@@ -28,35 +30,21 @@ public class BankServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
 
-        ServletContext servletContext = getServletContext();
-        TemplateEngine templateEngine = (TemplateEngine) servletContext.getAttribute("templateEngine");
-        JakartaServletWebApplication application = (JakartaServletWebApplication) servletContext.getAttribute("application");
-
-        IWebExchange exchange = application.buildExchange(req, resp);
-        WebContext ctx = new WebContext(exchange, req.getLocale());
-
-        resp.setContentType("text/html;charset=UTF-8");
-        templateEngine.process("bank", ctx, resp.getWriter());
-    }
-
-    @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp)
-            throws ServletException, IOException {
-
-        String action = req.getParameter("action");
-
-        ServletContext servletContext = getServletContext();
-        TemplateEngine templateEngine = (TemplateEngine) servletContext.getAttribute("templateEngine");
-        JakartaServletWebApplication application = (JakartaServletWebApplication) servletContext.getAttribute("application");
-
-        IWebExchange exchange = application.buildExchange(req, resp);
-        WebContext ctx = new WebContext(exchange, req.getLocale());
-
-        if ("transfer".equals(action)) {
-            handleTransfer(req, ctx);
-        } else if ("balance".equals(action)) {
-            handleBalance(req, ctx);
+        HttpSession session = req.getSession(false);
+        if (session == null || session.getAttribute("customerId") == null) {
+            resp.sendRedirect("/auth");
+            return;
         }
+
+        ServletContext servletContext = getServletContext();
+        TemplateEngine templateEngine = (TemplateEngine) servletContext.getAttribute("templateEngine");
+        JakartaServletWebApplication application = (JakartaServletWebApplication) servletContext.getAttribute("application");
+
+        IWebExchange exchange = application.buildExchange(req, resp);
+        WebContext ctx = new WebContext(exchange, req.getLocale());
+
+        // Add customer info to context
+        ctx.setVariable("customerName", session.getAttribute("customerName"));
 
         resp.setContentType("text/html;charset=UTF-8");
         templateEngine.process("bank", ctx, resp.getWriter());
@@ -75,6 +63,7 @@ public class BankServlet extends HttpServlet {
             ctx.setVariable("transferMessage", result);
 
         } catch (Exception e) {
+            log.error("Transfer error: {}", e.getMessage());
             ctx.setVariable("transferSuccess", false);
             ctx.setVariable("transferMessage", e.getMessage());
         }
@@ -90,8 +79,42 @@ public class BankServlet extends HttpServlet {
             ctx.setVariable("cardNumber", cardNumber);
 
         } catch (Exception e) {
+            log.error("Balance check error: {}", e.getMessage());
             ctx.setVariable("balanceSuccess", false);
             ctx.setVariable("balanceMessage", e.getMessage());
         }
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp)
+            throws ServletException, IOException {
+
+        // Check if user is logged in
+        HttpSession session = req.getSession(false);
+        if (session == null || session.getAttribute("customerId") == null) {
+            resp.sendRedirect("/auth");
+            return;
+        }
+
+        String action = req.getParameter("action");
+
+        ServletContext servletContext = getServletContext();
+        TemplateEngine templateEngine = (TemplateEngine) servletContext.getAttribute("templateEngine");
+        JakartaServletWebApplication application = (JakartaServletWebApplication) servletContext.getAttribute("application");
+
+        IWebExchange exchange = application.buildExchange(req, resp);
+        WebContext ctx = new WebContext(exchange, req.getLocale());
+
+        // Add customer info to context
+        ctx.setVariable("customerName", session.getAttribute("customerName"));
+
+        if ("transfer".equals(action)) {
+            handleTransfer(req, ctx);
+        } else if ("balance".equals(action)) {
+            handleBalance(req, ctx);
+        }
+
+        resp.setContentType("text/html;charset=UTF-8");
+        templateEngine.process("bank", ctx, resp.getWriter());
     }
 }
