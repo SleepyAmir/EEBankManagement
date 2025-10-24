@@ -31,7 +31,6 @@ public class DashboardServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
 
-        // Check if user is logged in
         HttpSession session = req.getSession(false);
         if (session == null || session.getAttribute("customerId") == null) {
             resp.sendRedirect("/auth");
@@ -48,7 +47,6 @@ public class DashboardServlet extends HttpServlet {
         WebContext ctx = new WebContext(exchange, req.getLocale());
 
         try {
-            // Get customer cards
             List<Card> cards = cardInfoService.getCustomerCards(customerId);
 
             ctx.setVariable("customerName", session.getAttribute("customerName"));

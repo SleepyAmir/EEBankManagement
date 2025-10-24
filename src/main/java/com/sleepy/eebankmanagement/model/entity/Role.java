@@ -1,25 +1,56 @@
 package com.sleepy.eebankmanagement.model.entity;
 
-import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import jakarta.persistence.Entity;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
+import org.hibernate.annotations.Where;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
-@Getter
-@Setter
 @Entity
-@Table(name = "roles")
-public class Role extends AuditableEntity {
+@Where(clause = "deleted_at IS NULL")
+public class Role extends BaseEntity {
+    @NotBlank
+    @Size(max = 50)
+    private String name;
 
+    @ManyToMany(mappedBy = "roles")
+    private Set<User> users = new HashSet<>();
 
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @ManyToMany
+    @JoinTable(
+        name = "role_authorities",
+        joinColumns = @JoinColumn(name = "role_id"),
+        inverseJoinColumns = @JoinColumn(name = "authority_id")
+    )
+    private Set<Authority> authorities = new HashSet<>();
 
-    @Column(name = "role_name", nullable = false, unique = true, length = 50)
-    private String roleName;
+    // Getters/Setters
+    public String getName() {
+        return name;
+    }
 
-    @OneToMany(mappedBy = "role", cascade = CascadeType.ALL)
-    private List<RolePermission> permissions = new ArrayList<>();
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Set<User> getUsers() {
+        return users;
+    }
+
+    public void setUsers(Set<User> users) {
+        this.users = users;
+    }
+
+    public Set<Authority> getAuthorities() {
+        return authorities;
+    }
+
+    public void setAuthorities(Set<Authority> authorities) {
+        this.authorities = authorities;
+    }
 }

@@ -43,7 +43,6 @@ public class BankServlet extends HttpServlet {
         IWebExchange exchange = application.buildExchange(req, resp);
         WebContext ctx = new WebContext(exchange, req.getLocale());
 
-        // Add customer info to context
         ctx.setVariable("customerName", session.getAttribute("customerName"));
 
         resp.setContentType("text/html;charset=UTF-8");
@@ -105,7 +104,6 @@ public class BankServlet extends HttpServlet {
         IWebExchange exchange = application.buildExchange(req, resp);
         WebContext ctx = new WebContext(exchange, req.getLocale());
 
-        // Add customer info to context
         ctx.setVariable("customerName", session.getAttribute("customerName"));
 
         if ("transfer".equals(action)) {
