@@ -1,6 +1,6 @@
 package com.sleepy.eebankmanagement.model.dto;
 
-import com.sleepy.eebankmanagement.model.entity.Transaction;
+import com.sleepy.eebankmanagement.model.entity.transaction.Transaction;
 import com.sleepy.eebankmanagement.model.entity.enums.TransactionStatus;
 import com.sleepy.eebankmanagement.model.entity.enums.TransactionType;
 import lombok.AllArgsConstructor;

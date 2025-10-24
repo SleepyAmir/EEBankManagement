@@ -2,7 +2,7 @@ package com.sleepy.eebankmanagement.servlet;
 
 import com.sleepy.eebankmanagement.model.dto.CardDTO;
 import com.sleepy.eebankmanagement.model.dto.CustomerDTO;
-import com.sleepy.eebankmanagement.model.entity.Card;
+import com.sleepy.eebankmanagement.model.entity.card.Card;
 import com.sleepy.eebankmanagement.services.CardInfoService;
 import jakarta.inject.Inject;
 import jakarta.servlet.ServletContext;

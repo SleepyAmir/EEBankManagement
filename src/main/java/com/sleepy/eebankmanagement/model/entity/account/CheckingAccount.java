@@ -1,6 +1,8 @@
-package com.sleepy.eebankmanagement.model.entity;
+package com.sleepy.eebankmanagement.model.entity.account;
 
 
+import com.sleepy.eebankmanagement.model.entity.card.Card;
+import com.sleepy.eebankmanagement.model.entity.transaction.Transaction;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.DecimalMin;
 import lombok.Getter;

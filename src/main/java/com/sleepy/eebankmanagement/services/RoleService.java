@@ -1,7 +1,7 @@
 package com.sleepy.eebankmanagement.services;
 
 
-import com.sleepy.eebankmanagement.model.entity.Role;
+import com.sleepy.eebankmanagement.model.entity.user.Role;
 import com.sleepy.eebankmanagement.repository.RoleRepository;
 import jakarta.ejb.Stateless;
 import jakarta.inject.Inject;

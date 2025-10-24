@@ -1,6 +1,7 @@
-package com.sleepy.eebankmanagement.model.entity;
+package com.sleepy.eebankmanagement.model.entity.user;
 
 
+import com.sleepy.eebankmanagement.model.entity.base.AuditableEntity;
 import com.sleepy.eebankmanagement.model.entity.enums.PermissionAction;
 import com.sleepy.eebankmanagement.model.entity.enums.PermissionType;
 import jakarta.persistence.*;

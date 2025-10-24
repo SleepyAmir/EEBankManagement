@@ -1,4 +1,4 @@
-package com.sleepy.eebankmanagement.model.entity;
+package com.sleepy.eebankmanagement.configs;
 
 import jakarta.servlet.ServletContext;
 import jakarta.servlet.ServletContextEvent;

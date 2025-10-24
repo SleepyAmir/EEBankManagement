@@ -1,6 +1,10 @@
-package com.sleepy.eebankmanagement.model.entity;
+package com.sleepy.eebankmanagement.model.entity.user;
 
 
+import com.sleepy.eebankmanagement.model.entity.account.AccountHolder;
+import com.sleepy.eebankmanagement.model.entity.loan.Loan;
+import com.sleepy.eebankmanagement.model.entity.account.PersonDocument;
+import com.sleepy.eebankmanagement.model.entity.base.Person;
 import com.sleepy.eebankmanagement.model.entity.enums.KycStatus;
 import com.sleepy.eebankmanagement.model.entity.enums.RiskLevel;
 import jakarta.persistence.*;

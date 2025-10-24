@@ -1,6 +1,7 @@
-package com.sleepy.eebankmanagement.model.entity;
+package com.sleepy.eebankmanagement.model.entity.loan;
 
 
+import com.sleepy.eebankmanagement.model.entity.base.AuditableEntity;
 import com.sleepy.eebankmanagement.model.entity.enums.PaymentStatus;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Min;

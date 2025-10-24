@@ -1,6 +1,5 @@
 package com.sleepy.eebankmanagement.servlet;
 
-import com.sleepy.eebankmanagement.model.entity.Customer;
 import com.sleepy.eebankmanagement.services.TransferService;
 import jakarta.inject.Inject;
 import jakarta.servlet.ServletContext;

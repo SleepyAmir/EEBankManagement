@@ -1,6 +1,8 @@
-package com.sleepy.eebankmanagement.model.entity;
+package com.sleepy.eebankmanagement.model.entity.account;
 
+import com.sleepy.eebankmanagement.model.entity.base.AuditableEntity;
 import com.sleepy.eebankmanagement.model.entity.enums.HolderType;
+import com.sleepy.eebankmanagement.model.entity.user.Customer;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;

@@ -1,6 +1,6 @@
 package com.sleepy.eebankmanagement.model.dto;
 
-import com.sleepy.eebankmanagement.model.entity.Account;
+import com.sleepy.eebankmanagement.model.entity.account.Account;
 import com.sleepy.eebankmanagement.model.entity.enums.AccountStatus;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

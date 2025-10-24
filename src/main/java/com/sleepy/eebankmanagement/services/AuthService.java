@@ -2,8 +2,12 @@ package com.sleepy.eebankmanagement.services;
 
 import com.sleepy.eebankmanagement.model.dto.CustomerDTO;
 import com.sleepy.eebankmanagement.model.dto.UserDTO;
-import com.sleepy.eebankmanagement.model.entity.*;
+import com.sleepy.eebankmanagement.model.entity.account.AccountHolder;
+import com.sleepy.eebankmanagement.model.entity.account.CheckingAccount;
+import com.sleepy.eebankmanagement.model.entity.card.Card;
 import com.sleepy.eebankmanagement.model.entity.enums.*;
+import com.sleepy.eebankmanagement.model.entity.user.Customer;
+import com.sleepy.eebankmanagement.model.entity.user.User;
 import jakarta.ejb.Stateless;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.NoResultException;

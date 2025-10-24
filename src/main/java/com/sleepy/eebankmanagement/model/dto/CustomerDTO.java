@@ -1,6 +1,6 @@
 package com.sleepy.eebankmanagement.model.dto;
 
-import com.sleepy.eebankmanagement.model.entity.Customer;
+import com.sleepy.eebankmanagement.model.entity.user.Customer;
 import com.sleepy.eebankmanagement.model.entity.enums.KycStatus;
 import com.sleepy.eebankmanagement.model.entity.enums.RiskLevel;
 import lombok.AllArgsConstructor;

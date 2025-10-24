@@ -1,6 +1,6 @@
 package com.sleepy.eebankmanagement.model.dto;
 
-import com.sleepy.eebankmanagement.model.entity.Card;
+import com.sleepy.eebankmanagement.model.entity.card.Card;
 import com.sleepy.eebankmanagement.model.entity.enums.CardStatus;
 import com.sleepy.eebankmanagement.model.entity.enums.CardType;
 import lombok.AllArgsConstructor;

@@ -1,6 +1,7 @@
-package com.sleepy.eebankmanagement.model.entity;
+package com.sleepy.eebankmanagement.model.entity.user;
 
 
+import com.sleepy.eebankmanagement.model.entity.base.Person;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;

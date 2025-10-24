@@ -1,7 +1,7 @@
 package com.sleepy.eebankmanagement.repository;
 
 
-import com.sleepy.eebankmanagement.model.entity.Role;
+import com.sleepy.eebankmanagement.model.entity.user.Role;
 import jakarta.ejb.Stateless;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;

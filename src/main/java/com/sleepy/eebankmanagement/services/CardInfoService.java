@@ -1,7 +1,7 @@
 package com.sleepy.eebankmanagement.services;
 
 
-import com.sleepy.eebankmanagement.model.entity.Card;
+import com.sleepy.eebankmanagement.model.entity.card.Card;
 import jakarta.ejb.Stateless;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;

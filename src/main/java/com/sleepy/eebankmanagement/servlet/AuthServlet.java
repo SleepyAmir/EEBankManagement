@@ -1,7 +1,6 @@
 package com.sleepy.eebankmanagement.servlet;
 
 import com.sleepy.eebankmanagement.model.dto.CustomerDTO;
-import com.sleepy.eebankmanagement.model.entity.Customer;
 import com.sleepy.eebankmanagement.services.AuthService;
 import jakarta.inject.Inject;
 import jakarta.servlet.ServletContext;

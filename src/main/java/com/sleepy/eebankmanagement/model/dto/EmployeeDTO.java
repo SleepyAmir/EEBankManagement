@@ -1,7 +1,6 @@
 package com.sleepy.eebankmanagement.model.dto;
 
-import com.sleepy.eebankmanagement.model.entity.Employee;
-import com.sleepy.eebankmanagement.model.entity.EmployeeRole;
+import com.sleepy.eebankmanagement.model.entity.user.Employee;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -9,7 +8,6 @@ import lombok.Setter;
 
 import java.time.LocalDateTime;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 @Getter
 @Setter

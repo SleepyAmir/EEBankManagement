@@ -1,7 +1,7 @@
 package com.sleepy.eebankmanagement.model.dto;
 
-import com.sleepy.eebankmanagement.model.entity.Role;
-import com.sleepy.eebankmanagement.model.entity.User;
+import com.sleepy.eebankmanagement.model.entity.user.Role;
+import com.sleepy.eebankmanagement.model.entity.user.User;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

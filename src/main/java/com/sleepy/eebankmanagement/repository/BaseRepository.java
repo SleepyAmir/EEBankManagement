@@ -1,7 +1,7 @@
 package com.sleepy.eebankmanagement.repository;
 
 
-import com.sleepy.eebankmanagement.model.entity.BaseEntity;
+import com.sleepy.eebankmanagement.model.entity.base.BaseEntity;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.Query;
 import jakarta.persistence.TypedQuery;

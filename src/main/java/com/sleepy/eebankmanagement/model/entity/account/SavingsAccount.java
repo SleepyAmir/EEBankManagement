@@ -1,6 +1,7 @@
-package com.sleepy.eebankmanagement.model.entity;
+package com.sleepy.eebankmanagement.model.entity.account;
 
 
+import com.sleepy.eebankmanagement.model.entity.transaction.Transaction;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.DecimalMax;
 import jakarta.validation.constraints.DecimalMin;

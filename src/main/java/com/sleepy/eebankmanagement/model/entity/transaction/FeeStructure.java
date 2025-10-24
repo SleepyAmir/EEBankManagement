@@ -1,6 +1,7 @@
-package com.sleepy.eebankmanagement.model.entity;
+package com.sleepy.eebankmanagement.model.entity.transaction;
 
 
+import com.sleepy.eebankmanagement.model.entity.base.AuditableEntity;
 import com.sleepy.eebankmanagement.model.entity.enums.FeeType;
 import com.sleepy.eebankmanagement.model.entity.enums.FrequencyPeriod;
 import jakarta.persistence.*;

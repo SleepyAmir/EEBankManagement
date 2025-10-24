@@ -1,4 +1,4 @@
-package com.sleepy.eebankmanagement.model.entity;
+package com.sleepy.eebankmanagement.model.entity.base;
 
 
 import com.sleepy.eebankmanagement.model.entity.enums.Gender;
