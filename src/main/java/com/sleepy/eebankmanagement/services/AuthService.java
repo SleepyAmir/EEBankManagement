@@ -75,27 +75,21 @@ public class AuthService {
     public CustomerDTO signup(String firstName, String lastName, String nationalId,
                               String email, String phoneNumber, String password, String address) {
 
-        // Check if email exists
         try {
             em.createQuery("SELECT c FROM Customer c WHERE c.email = :email", Customer.class)
                     .setParameter("email", email)
                     .getSingleResult();
             throw new RuntimeException("این ایمیل قبلاً ثبت شده است");
         } catch (NoResultException e) {
-            // Email doesn't exist, continue
         }
-
-        // Check if national ID exists
         try {
             em.createQuery("SELECT c FROM Customer c WHERE c.nationalId = :nationalId", Customer.class)
                     .setParameter("nationalId", nationalId)
                     .getSingleResult();
             throw new RuntimeException("این کد ملی قبلاً ثبت شده است");
         } catch (NoResultException e) {
-            // National ID doesn't exist, continue
         }
 
-        // Create customer
         Customer customer = new Customer();
         customer.setFirstName(firstName);
         customer.setLastName(lastName);
@@ -113,7 +107,6 @@ public class AuthService {
 
         em.persist(customer);
 
-        // Create checking account
         CheckingAccount account = new CheckingAccount();
         account.setAccountNumber(generateAccountNumber());
         account.setBalance(BigDecimal.ZERO);
@@ -129,7 +122,6 @@ public class AuthService {
 
         em.persist(account);
 
-        // Create account holder
         AccountHolder accountHolder = new AccountHolder();
         accountHolder.setCustomer(customer);
         accountHolder.setAccount(account);
@@ -146,7 +138,6 @@ public class AuthService {
 
         em.persist(accountHolder);
 
-        // Create card
         Card card = new Card();
         card.setCardNumber(generateCardNumber());
         card.setCardType(CardType.DEBIT);

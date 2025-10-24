@@ -1,5 +1,6 @@
 package com.sleepy.eebankmanagement.servlet;
 
+import com.sleepy.eebankmanagement.model.dto.CustomerDTO;
 import com.sleepy.eebankmanagement.model.entity.Customer;
 import com.sleepy.eebankmanagement.services.AuthService;
 import jakarta.inject.Inject;
@@ -79,7 +80,7 @@ public class AuthServlet extends HttpServlet {
             String email = req.getParameter("email");
             String password = req.getParameter("password");
 
-            Customer customer = authService.login(email, password);
+            CustomerDTO customer = authService.customerLogin(email, password);
 
             HttpSession session = req.getSession();
             session.setAttribute("customer", customer);
@@ -110,7 +111,7 @@ public class AuthServlet extends HttpServlet {
                 throw new RuntimeException("رمز عبور و تکرار آن مطابقت ندارند");
             }
 
-            Customer customer = authService.signup(firstName, lastName, nationalId,
+            CustomerDTO customer = authService.signup(firstName, lastName, nationalId,
                     email, phoneNumber, password, address);
 
             ctx.setVariable("signupSuccess", true);
