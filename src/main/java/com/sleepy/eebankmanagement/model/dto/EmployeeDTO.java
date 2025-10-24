@@ -37,9 +37,7 @@ public class EmployeeDTO {
         this.lastLogin = employee.getLastLogin();
         this.isLocked = employee.getIsLocked();
         this.failedLoginAttempts = employee.getFailedLoginAttempts();
-        this.roles = employee.getEmployeeRoles().stream()
-                .map(EmployeeRole::getRoleName)
-                .collect(Collectors.toSet());
+
     }
 
     public String getFullName() {
